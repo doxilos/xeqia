@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState} from "react"
+import {Routes, Route} from "react-router-dom"
+
+import {Create, Home, Details} from "./pages"
+import {Navbar} from "./components"
+
+// FIREBASE
+import {app} from "./utils/firebase.utils"
+import {Container} from "@mui/material"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+   const [user, setUser] = useState(null)
+
+   app.auth().onAuthStateChanged((user) => {
+      if (user) setUser(user)
+      // TODO remove this from prod
+      else console.log("User signed out.")
+   })
+
+   return (
+      <Container>
+         <Navbar setUser={setUser} user={user}/>
+         <Routes>
+            <Route path="/" element={<Home user={user}/>}/>
+            <Route path="/create" element={<Create user={user}/>}/>
+            <Route path="/details/:postId" element={<Details/>}/>
+         </Routes>
+      </Container>
+   )
 }
 
-export default App;
+export default App
