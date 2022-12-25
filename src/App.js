@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 import {Routes, Route} from "react-router-dom"
 
 import {Create, Home, Details} from "./pages"
-import {Navbar} from "./components"
+import {Footer, Navbar} from "./components"
 
 // FIREBASE
 import {app} from "./utils/firebase.utils"
@@ -26,6 +26,7 @@ function App() {
             <Route path="/create" element={<Create user={user}/>}/>
             <Route path="/details/:postId" element={<Details/>}/>
          </Routes>
+         <Footer/>
       </Container>
    )
 }

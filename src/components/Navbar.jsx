@@ -55,7 +55,7 @@ const Navbar = ({setUser, user}) => {
          <Grow in timeout={800}>
             <AppBar color="transparent" elevation={0} sx={{backdropFilter: "blur(30px)"}} style={{position: 'fixed'}} position="sticky">
                <Toolbar>
-                  <Typography onClick={() => navigate("/")} variant="h6" component="div" sx={{flexGrow: 1, cursor: "pointer"}}>
+                  <Typography  onClick={() => navigate("/")} variant="h6" component="div" sx={{flexGrow: 1, cursor: "pointer"}}>
                      XEQIA
                   </Typography>
                   {
