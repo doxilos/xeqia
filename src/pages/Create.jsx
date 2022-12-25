@@ -73,9 +73,6 @@ const Create = ({user}) => {
                <Typography variant="h5">
                   Create a New Post
                </Typography>
-               <Typography variant="p">
-                  User ID: {user.uid}
-               </Typography>
                <Box
 
                   justifyContent="center"
