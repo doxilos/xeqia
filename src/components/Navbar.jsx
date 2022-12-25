@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from "react"
-import {AppBar, Box, Button, Grow, Toolbar, Typography} from "@mui/material"
+import {AppBar, Box, Button, Grow, Toolbar, Typography, useMediaQuery, useTheme} from "@mui/material"
 import {useLocation, useNavigate} from "react-router-dom"
 import firebase from "firebase"
+import {DrawerComponent} from "./index"
 
 const links = [
    {name: "HOME", linkTo: "/"},
-   {name: "CREATE", linkTo: "/create"},
+   {name: "ABOUT", linkTo: "/about"},
    {name: "PROFILE", linkTo: "/profile"},
+   {name: "CREATE", linkTo: "/create"},
 ]
 
 const NavLink = ({name, isActive, handleClick}) => (
    <Button
       sx={{mx: 1, transition: "all ease 200ms"}}
       onClick={handleClick}
-      color="primary"
+      color="inherit"
       variant={isActive === name ? "outlined" : "text"}
    >
       {name}
@@ -23,11 +25,15 @@ const NavLink = ({name, isActive, handleClick}) => (
 const Navbar = ({setUser, user}) => {
 
    const navigate = useNavigate()
-   const [isActive, setIsActive] = useState("")
-
    const location = useLocation()
-
    const provider = new firebase.auth.GoogleAuthProvider()
+   const theme = useTheme()
+   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
+
+   const [isActive, setIsActive] = useState("")
+   const [openDrawer, setOpenDrawer] = useState(false)
+
+
 
    useEffect(() => {
       if (location.pathname === "/") {
@@ -56,21 +62,28 @@ const Navbar = ({setUser, user}) => {
          <Grow in timeout={800}>
             <AppBar color="transparent" elevation={0} sx={{backdropFilter: "blur(30px)"}} style={{position: 'fixed'}} position="sticky">
                <Toolbar>
-                  <Typography  onClick={() => navigate("/")} variant="h6" component="div" sx={{flexGrow: 1, cursor: "pointer"}}>
+                  <Typography  onClick={() => {
+                     setIsActive("/")
+                     navigate("/")
+                  }} variant="h6"  sx={{cursor: "pointer", flexGrow: 1}}>
                      XEQIA
                   </Typography>
-                  {
-                     links.map((link) => (
-                        <NavLink
-                           key={link.name}
-                           name={link.name}
-                           isActive={isActive}
-                           handleClick={() => {
-                              setIsActive(link.name)
-                              navigate(link.linkTo)
-                           }}
-                        />
-                     ))
+                  {isMobile ? (
+                     <DrawerComponent openDrawer={openDrawer} setOpenDrawer={setOpenDrawer}/>
+                     ):
+                     (
+                        links.map((link) => (
+                           <NavLink
+                              key={link.name}
+                              name={link.name}
+                              isActive={isActive}
+                              handleClick={() => {
+                                 setIsActive(link.name)
+                                 navigate(link.linkTo)
+                              }}
+                           />
+                        ))
+                     )
                   }
 
                   <Button

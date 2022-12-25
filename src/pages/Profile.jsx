@@ -117,7 +117,7 @@ function Profile({user}) {
          <Grow in timeout={800}>
             <Box sx={{mt: 6, mb: 6, transition: "all ease 500ms"}} display="flex" alignItems="center"
                  justifyContent="center">
-               <Button disabled={isEmpty || isLoading} onClick={() => fetchMorePosts()}
+               <Button color="inherit" disabled={isEmpty || isLoading} onClick={() => fetchMorePosts()}
                        variant="outlined">{isEmpty ? "NO MORE DATA" : "MORE"}</Button>
             </Box>
          </Grow>
