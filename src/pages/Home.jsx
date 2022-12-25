@@ -58,7 +58,7 @@ const Home = ({user}) => {
       )
    } else return (
       <Container>
-         <Grid2 sx={{mt: 12}} container alignItems="center" justifyContent="center" spacing={{xs: 2, md: 3}}
+         <Grid2 sx={{mt: 12}} container alignItems="center" justifyContent="center" spacing={{xs: 1, md: 3}}
                 columns={{xs: 4, sm: 8, md: 12}}>
             {
                listOfPosts.map((post, index) => (
