@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom"
 import {db} from "../utils/firebase.utils"
 import {Button, Card, CardContent, CardMedia, Grow, Typography, Box, Container} from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2"
-import {zhCN} from "@mui/material/locale"
 
 const Home = ({user}) => {
 
@@ -60,33 +59,34 @@ const Home = ({user}) => {
       <Container>
          <Grid2 sx={{mt: 12}} container alignItems="center" justifyContent="center" spacing={{xs: 2, md: 3}}
                 columns={{xs: 2, sm: 8, md: 12}}>
-            {
-               listOfPosts.map((post, index) => (
-                  <Grow in timeout={800} key={post.url}>
-                     <Grid2 xs={2} sm={4} md={4}>
-                        <Card onClick={() => navigate(`/details/${post.postId}`)} sx={{
-                           maxWidth: 480,
-                           cursor: "pointer",
-                           transition: "all ease 350ms",
-                           ":hover": {backgroundColor: "#3F51B5"},
-                        }}>
-                           <CardMedia
-                              sx={{height: 320}}
-                              image={post.url}
-                           />
-                           <CardContent>
-                              <Typography gutterBottom variant="h5" component="div">
-                                 {post.title}
-                              </Typography>
-                           </CardContent>
-                        </Card>
-                     </Grid2>
-                  </Grow>
-               ))
+            {listOfPosts.length > 0 && listOfPosts.map((post, index) => (
+               <Grow in timeout={800} key={post.postId}>
+                  <Grid2 xs={2} sm={4} md={4}>
+                     <Card onClick={() => navigate(`/details/${post.postId}`)} sx={{
+                        maxWidth: 480,
+                        cursor: "pointer",
+                        transition: "all ease 350ms",
+                        ":hover": {backgroundColor: "#3F51B5"},
+                     }}>
+                        <CardMedia
+                           sx={{height: 320}}
+                           image={post.url}
+                        />
+                        <CardContent>
+                           <Typography gutterBottom variant="h5" component="div">
+                              {post.title}
+                           </Typography>
+                        </CardContent>
+                     </Card>
+                  </Grid2>
+               </Grow>
+
+            ))
             }
          </Grid2>
          <Grow in timeout={800}>
-            <Box sx={{mt: 6, mb: 6, transition: "all ease 500ms"}} display="flex" alignItems="center" justifyContent="center">
+            <Box sx={{mt: 6, mb: 6, transition: "all ease 500ms"}} display="flex" alignItems="center"
+                 justifyContent="center">
                <Button disabled={isEmpty || isLoading} onClick={() => fetchMorePosts()}
                        variant="outlined">{isEmpty ? "NO MORE DATA" : "MORE"}</Button>
             </Box>

@@ -18,6 +18,7 @@ const Create = ({user}) => {
       title: ""
    })
    const [file, setFile] = useState(null)
+   const [postId, setPostId] = useState("")
 
    const handleFileChange = (file) => {
       setFile(file)
@@ -31,8 +32,12 @@ const Create = ({user}) => {
          const cid = await storeFiles([file])
 
          try {
+
+            const _postId = uuidv4()
+            setPostId(_postId)
+
             await db.collection("posts").add({
-               postId: uuidv4(),
+               postId: _postId,
                owner: user.uid,
                title: form.title,
                url: `https://w3s.link/ipfs/${cid}/${file.name}`,
@@ -40,7 +45,7 @@ const Create = ({user}) => {
             })
 
             setIsLoading(false)
-            navigate("/")
+            navigate(`/details/${_postId}`)
          } catch (e) {
             console.log(e)
          }
