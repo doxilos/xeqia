@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {Routes, Route} from "react-router-dom"
 
-import {Create, Home, Details, About, Profile} from "./pages"
+import {Create, Home, Details, About, Profile, Donate} from "./pages"
 import {Footer, Navbar} from "./components"
 
 // FIREBASE
@@ -24,6 +24,7 @@ function App() {
             <Route path="/create" element={<Create user={user}/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/profile" element={<Profile user={user}/>}/>
+            <Route path="/donate" element={<Donate/>}/>
             <Route path="/details/:postId" element={<Details/>}/>
          </Routes>
          <Footer/>

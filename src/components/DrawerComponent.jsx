@@ -8,6 +8,7 @@ const links = [
    {name: "ABOUT", linkTo: "/about"},
    {name: "PROFILE", linkTo: "/profile"},
    {name: "CREATE", linkTo: "/create"},
+   {name: "DONATE", linkTo: "/donate"},
 ]
 
 const NavLink = ({name, isActive, handleClick}) => (

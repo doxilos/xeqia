@@ -1,6 +1,5 @@
 import React from 'react'
-import {Box, Button, Container, Grow, IconButton, Typography} from "@mui/material"
-import InstagramIcon from "@mui/icons-material/Instagram"
+import {Box, Container, Grow,Typography} from "@mui/material"
 
 function About() {
    return (
