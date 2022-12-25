@@ -6,6 +6,7 @@ import firebase from "firebase"
 const links = [
    {name: "HOME", linkTo: "/"},
    {name: "CREATE", linkTo: "/create"},
+   {name: "PROFILE", linkTo: "/profile"},
 ]
 
 const NavLink = ({name, isActive, handleClick}) => (

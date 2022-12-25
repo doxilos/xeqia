@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {Routes, Route} from "react-router-dom"
 
-import {Create, Home, Details} from "./pages"
+import {Create, Home, Details, About, Profile} from "./pages"
 import {Footer, Navbar} from "./components"
 
 // FIREBASE
@@ -14,8 +14,6 @@ function App() {
 
    app.auth().onAuthStateChanged((user) => {
       if (user) setUser(user)
-      // TODO remove this from prod
-      else console.log("User signed out.")
    })
 
    return (
@@ -24,6 +22,8 @@ function App() {
          <Routes>
             <Route path="/" element={<Home user={user}/>}/>
             <Route path="/create" element={<Create user={user}/>}/>
+            <Route path="/about" element={<About/>}/>
+            <Route path="/profile" element={<Profile user={user}/>}/>
             <Route path="/details/:postId" element={<Details/>}/>
          </Routes>
          <Footer/>
