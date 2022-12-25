@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom"
 
 import {db} from "../utils/firebase.utils"
-import {Box, Container, Grow, Paper, Typography} from "@mui/material"
+import {Box, Card, CardContent, CardMedia, Container, Grow, Paper, Typography} from "@mui/material"
 
 const Details = () => {
 
@@ -33,12 +33,19 @@ const Details = () => {
       <Container>
          <Grow in timeout={600}>
             <Box sx={{mt: 12}} display="flex" alignContent="center" justifyContent="center">
-               <Paper sx={{m: 6, p: 4}}>
-                  <img src={post.url} alt="post" style={{maxWidth: "640px"}}/>
-                  <Typography sx={{mt: 2}} variant="h5">
-                     {post.title}
-                  </Typography>
-               </Paper>
+               <Card sx={{maxWidth: 1920, minWidth: 400}}>
+                  <CardMedia
+                     height="650"
+                     component="img"
+                     image={post.url}
+                     title={post.title}
+                  />
+                  <CardContent>
+                     <Typography justifyContent="center" alignContent="center" gutterBottom variant="h5">
+                        {post.title}
+                     </Typography>
+                  </CardContent>
+               </Card>
             </Box>
          </Grow>
       </Container>
