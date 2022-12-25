@@ -57,6 +57,15 @@ const Home = ({user}) => {
       )
    } else return (
       <Container>
+
+         <Grow in timeout={700}>
+            <Box sx={{mt: 12}} display="flex" alignItems="center" justifyContent="center">
+               <Typography variant="h6">
+                  This site stores images to IPFS. This means any image you uploaded CANNOT be deleted. Use with caution.
+               </Typography>
+            </Box>
+         </Grow>
+
          <Grid2 sx={{mt: 12}} container alignItems="center" justifyContent="center" spacing={{xs: 2, md: 3}}
                 columns={{xs: 2, sm: 8, md: 12}}>
             {listOfPosts.length > 0 && listOfPosts.map((post, index) => (
