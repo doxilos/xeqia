@@ -17,7 +17,7 @@ function Profile({user}) {
    const postsRef = db.collection("posts").orderBy("createdAt", "desc")
 
    useEffect(() => {
-      if(user){
+      if (user) {
          postsRef.limit(6).where("owner", "==", user.uid)
             .get().then((collections) => {
             updateState(collections)
@@ -27,12 +27,12 @@ function Profile({user}) {
 
    const updateState = (collections) => {
       const isCollectionEmpty = collections.size === 0
-      if(!isCollectionEmpty){
+      if (!isCollectionEmpty) {
          const posts = collections.docs.map((post) => post.data())
          const lastDoc = collections.docs[collections.docs.length - 1]
          setListOfPosts([...listOfPosts, ...posts])
          setLastKey(lastDoc)
-      }else{
+      } else {
          setIsEmpty(true)
       }
       setIsLoading(false)
@@ -63,52 +63,55 @@ function Profile({user}) {
    } else return (
       <Container>
 
-         <Box display="flex" justifyContent="center" alignItems="center">
-            <Paper sx={{mt: 12, p: 2}} >
-               <img src={user.photoURL} alt="user photo" style={{maxWidth: "75px", borderRadius: "12px"}}/>
-            </Paper>
-            <Paper sx={{mt: 12, p: 5, ml: 2}}>
-               <Typography sx={{my: 2, mx: 2}} gutterBottom variant="p">
-                  Logged in as: {user.displayName}<br/>
-               </Typography>
-            </Paper>
-         </Box>
+         <Grow in timeout={700}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+               <Paper sx={{mt: 12, p: 2}}>
+                  <img src={user.photoURL} alt="user photo" style={{maxWidth: "75px", borderRadius: "12px"}}/>
+               </Paper>
+               <Paper sx={{mt: 12, p: 5, ml: 2}}>
+                  <Typography sx={{my: 2, mx: 2}} gutterBottom variant="p">
+                     Logged in as: {user.displayName}<br/>
+                  </Typography>
+               </Paper>
+            </Box>
+         </Grow>
 
-
-         <Box display="flex" justifyContent="center" alignItems="center">
-            <Paper sx={{mt: 2, p: 2, ml: 2}}>
-               <Typography sx={{my: 2, mx: 2}} gutterBottom variant="p">
-                  Your Posts<br/>
-               </Typography>
-            </Paper>
-         </Box>
+         <Grow in timeout={700}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+               <Paper sx={{mt: 2, p: 2, ml: 2}}>
+                  <Typography sx={{my: 2, mx: 2}} gutterBottom variant="p">
+                     Your Posts<br/>
+                  </Typography>
+               </Paper>
+            </Box>
+         </Grow>
 
          <Grid2 sx={{mt: 6}} container alignItems="center" justifyContent="center" spacing={{xs: 2, md: 3}}
                 columns={{xs: 2, sm: 8, md: 12}}>
-         {
-            listOfPosts.map((post) => (
-               <Grow in timeout={800} key={post.postId}>
-                  <Grid2 xs={2} sm={4} md={4}>
-                     <Card onClick={() => navigate(`/details/${post.postId}`)} sx={{
-                        maxWidth: 480,
-                        cursor: "pointer",
-                        transition: "all ease 350ms",
-                        ":hover": {backgroundColor: "#3F51B5"},
-                     }}>
-                        <CardMedia
-                           sx={{height: 320}}
-                           image={post.url}
-                        />
-                        <CardContent>
-                           <Typography gutterBottom variant="h5" component="div">
-                              {post.title}
-                           </Typography>
-                        </CardContent>
-                     </Card>
-                  </Grid2>
-               </Grow>
-            ))
-         }
+            {
+               listOfPosts.map((post) => (
+                  <Grow in timeout={800} key={post.postId}>
+                     <Grid2 xs={2} sm={4} md={4}>
+                        <Card onClick={() => navigate(`/details/${post.postId}`)} sx={{
+                           maxWidth: 480,
+                           cursor: "pointer",
+                           transition: "all ease 350ms",
+                           ":hover": {backgroundColor: "#3F51B5"},
+                        }}>
+                           <CardMedia
+                              sx={{height: 320}}
+                              image={post.url}
+                           />
+                           <CardContent>
+                              <Typography gutterBottom variant="h5" component="div">
+                                 {post.title}
+                              </Typography>
+                           </CardContent>
+                        </Card>
+                     </Grid2>
+                  </Grow>
+               ))
+            }
          </Grid2>
 
          <Grow in timeout={800}>
