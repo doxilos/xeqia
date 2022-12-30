@@ -42,29 +42,17 @@ const Home = ({user}) => {
          .limit(6)
          .get()
          .then((collections) => {
-         updateState(collections)
-      })
+            updateState(collections)
+         })
    }
-
-   if (!user) {
-      return (
-         <Container>
-            <Grow in timeout={700}>
-               <Box sx={{mt: 12}} display="flex" alignItems="center" justifyContent="center">
-                  <Typography>
-                     You need to login to see posts.
-                  </Typography>
-               </Box>
-            </Grow>
-         </Container>
-      )
-   } else return (
+   return (
       <Container>
 
          <Grow in timeout={700}>
             <Box sx={{mt: 12}} display="flex" alignItems="center" justifyContent="center">
                <Typography variant="h6">
-                  This site stores images to IPFS. This means any image you uploaded CANNOT be deleted. Use with caution.<br/>
+                  This site stores images to IPFS. This means any image you uploaded CANNOT be deleted. Use with
+                  caution.<br/>
                   In addition this site may contain disturbing or adult content.
                </Typography>
             </Box>
